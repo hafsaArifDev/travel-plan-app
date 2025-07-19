@@ -105,3 +105,31 @@ button:hover {
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
+#packingList {
+  list-style: none;
+  padding: 0;
+}
+
+#packingList li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#packingList li input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.add-item {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.add-item input {
+  padding: 8px;
+  width: 200px;
+}

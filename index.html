@@ -73,15 +73,16 @@
     </ul>
   </div>
 
-  <div class="section hidden" id="packing">
-    <h1>Packing List</h1>
-    <ul>
-      <li><input type="checkbox" /> Passport</li>
-      <li><input type="checkbox" /> Clothes</li>
-      <li><input type="checkbox" /> Charger</li>
-      <li><input type="checkbox" /> Snacks</li>
-    </ul>
+ <section id="packing" class="section" style="display: none;">
+  <h2>Packing List</h2>
+  <ul id="packingList"></ul>
+
+  <div class="add-item">
+    <input type="text" id="newItem" placeholder="Add item..." />
+    <button onclick="addPackingItem()">Add</button>
   </div>
+</section>
+
 
   <script src="script.js"></script>
 </body>

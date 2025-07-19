@@ -61,5 +61,66 @@ window.onload = function () {
   displayBooking();
   showWelcomeMessage();
 };
+// Packing List Functions
+const defaultItems = ["Passport", "Clothes", "Toothbrush", "Phone Charger", "Travel Documents"];
+
+function loadPackingList() {
+  const savedList = JSON.parse(localStorage.getItem("packingList")) || defaultItems.map(item => ({ name: item, checked: false }));
+  displayPackingList(savedList);
+}
+
+function displayPackingList(items) {
+  const list = document.getElementById("packingList");
+  list.innerHTML = "";
+
+  items.forEach((item, index) => {
+    const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = item.checked;
+    checkbox.onchange = () => {
+      items[index].checked = checkbox.checked;
+      savePackingList(items);
+    };
+
+    const span = document.createElement("span");
+    span.textContent = item.name;
+    if (item.checked) {
+      span.style.textDecoration = "line-through";
+    }
+
+    checkbox.onchange = () => {
+      items[index].checked = checkbox.checked;
+      savePackingList(items);
+    };
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    list.appendChild(li);
+  });
+}
+
+function savePackingList(items) {
+  localStorage.setItem("packingList", JSON.stringify(items));
+  displayPackingList(items);
+}
+
+function addPackingItem() {
+  const newItem = document.getElementById("newItem").value.trim();
+  if (newItem) {
+    const items = JSON.parse(localStorage.getItem("packingList")) || [];
+    items.push({ name: newItem, checked: false });
+    savePackingList(items);
+    document.getElementById("newItem").value = "";
+  }
+}
+
+// Call packing list when page loads
+window.onload = function () {
+  displayBooking();
+  showWelcomeMessage();
+  loadPackingList();
+};
 
 }
