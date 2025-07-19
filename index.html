@@ -3,86 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Travel Planner App</title>
+  <title>TravelEase</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header class="app-header">
-  <h1 class="app-title"> TravelEase</h1>
-  <p class="app-subtitle">All you need for a smooth and joyful journey </p>
-</header>
+  <header>
+    <h1>TravelEase</h1>
+    <p>All you need for a journey made easy</p>
+    <nav>
+      <ul>
+        <li onclick="showSection('dashboard')">🏠 Dashboard</li>
+        <li onclick="showSection('destinations')">🌍 Destinations</li>
+        <li onclick="showSection('bookings')">✈️ Bookings</li>
+        <li onclick="showSection('itinerary')">📆 Itinerary</li>
+        <li onclick="showSection('packing')">🧳 Packing List</li>
+      </ul>
+    </nav>
+  </header>
 
-<!-- Ask for user name -->
-<div id="userPrompt" class="user-name-section">
-  <label for="userName">Enter your name to begin:</label>
-  <input type="text" id="userName" placeholder="Your Name" />
-  <button onclick="saveUserName()">Start</button>
-</div>
+  <main>
+    <div id="nameInputContainer">
+      <h2>Enter Your Name</h2>
+      <form id="nameForm">
+        <input type="text" id="username" placeholder="Your Name" required />
+        <button type="submit">Save</button>
+      </form>
+    </div>
 
-<!-- Welcome message (will show after name is saved) -->
-<h2 id="welcomeMessage" class="welcome-msg" style="display: none;"></h2>
+    <div id="welcomeMessage" style="display: none;">
+      <h2>Welcome, <span id="userDisplayName"></span>!</h2>
+    </div>
 
+    <section id="dashboard" class="section">This is your Dashboard.</section>
+    <section id="destinations" class="section" style="display: none;">List of your dream Destinations.</section>
 
-  <!-- 🌐 Top Navigation Bar -->
-  <nav class="navbar">
-    <ul>
-      <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
-      <li><a href="#" onclick="showSection('destinations')">Destinations</a></li>
-      <li><a href="#" onclick="showSection('bookings')">Bookings</a></li>
-      <li><a href="#" onclick="showSection('itinerary')">Itinerary</a></li>
-      <li><a href="#" onclick="showSection('packing')">Packing List</a></li>
-    </ul>
-  </nav>
+    <section id="bookings" class="section" style="display: none;">
+      <h2>Bookings</h2>
+      <form id="bookingForm">
+        <input type="text" id="flightInput" placeholder="Flight Details" required />
+        <input type="text" id="hotelInput" placeholder="Hotel Details" required />
+        <button type="submit">Save Booking</button>
+      </form>
+      <div id="bookingDisplay"></div>
+    </section>
 
-  <!-- 📄 Sections -->
-  <div class="section" id="dashboard">
-    <h1>Welcome to Your Travel Planner</h1>
-    <p>Plan your perfect trip with ease!</p>
-  </div>
+    <section id="itinerary" class="section" style="display: none;">
+      <h2>Itinerary</h2>
+      <ul>
+        <li>Day 1: Arrival</li>
+        <li>Day 2: City Tour</li>
+        <li>Day 3: Beach Day</li>
+        <li>Day 4: Shopping & Departure</li>
+      </ul>
+    </section>
 
-  <div class="section hidden" id="destinations">
-    <h1>Popular Destinations</h1>
-    <ul>
-      <li>Paris, France</li>
-      <li>Tokyo, Japan</li>
-      <li>New York City, USA</li>
-      <li>Istanbul, Turkey</li>
-    </ul>
-  </div>
-
-  <div class="section hidden" id="bookings">
-    <h1>Bookings</h1>
-    <p>Enter your flight and hotel information here.</p>
-   <form id="bookingForm">
-  <input type="text" id="flightInput" placeholder="Flight Number" required />
-  <input type="text" id="hotelInput" placeholder="Hotel Name" required />
-  <button type="submit">Save Booking</button>
-</form>
-
-<div id="savedBooking" class="saved-info"></div>
-
-  </div>
-
-  <div class="section hidden" id="itinerary">
-    <h1>Itinerary</h1>
-    <ul>
-      <li>Day 1: Arrival & Hotel Check-in</li>
-      <li>Day 2: City Tour</li>
-      <li>Day 3: Adventure Day</li>
-      <li>Day 4: Relax & Return</li>
-    </ul>
-  </div>
-
- <section id="packing" class="section" style="display: none;">
-  <h2>Packing List</h2>
-  <ul id="packingList"></ul>
-
-  <div class="add-item">
-    <input type="text" id="newItem" placeholder="Add item..." />
-    <button onclick="addPackingItem()">Add</button>
-  </div>
-</section>
-
+    <section id="packing" class="section" style="display: none;">
+      <h2>Packing List</h2>
+      <form id="packingForm">
+        <input type="text" id="packingItem" placeholder="Add item..." required />
+        <button type="submit">Add</button>
+      </form>
+      <ul id="packingList"></ul>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>

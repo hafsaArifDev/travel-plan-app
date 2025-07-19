@@ -1,12 +1,26 @@
-function showSection(sectionId) {
+function showSection(id) {
   const sections = document.querySelectorAll(".section");
-  sections.forEach(section => section.classList.add("hidden"));
+  sections.forEach(section => {
+    section.style.display = section.id === id ? "block" : "none";
+  });
+}
 
-  const target = document.getElementById(sectionId);
-  if (target) {
-    target.classList.remove("hidden");
+function showWelcomeMessage() {
+  const name = localStorage.getItem("travelAppUserName");
+  if (name) {
+    document.getElementById("nameInputContainer").style.display = "none";
+    document.getElementById("welcomeMessage").style.display = "block";
+    document.getElementById("userDisplayName").textContent = name;
   }
-  // Save Booking Info to localStorage
+}
+
+document.getElementById("nameForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const name = document.getElementById("username").value;
+  localStorage.setItem("travelAppUserName", name);
+  showWelcomeMessage();
+});
+
 document.getElementById("bookingForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const flight = document.getElementById("flightInput").value;
@@ -19,54 +33,29 @@ document.getElementById("bookingForm").addEventListener("submit", function (e) {
   this.reset();
 });
 
-// Display Booking Info if exists
 function displayBooking() {
-  const flight = localStorage.getItem("flight");
-  const hotel = localStorage.getItem("hotel");
+  const flight = localStorage.getItem("flight") || "Not added";
+  const hotel = localStorage.getItem("hotel") || "Not added";
 
-  if (flight || hotel) {
-    document.getElementById("savedBooking").innerHTML = `
-      <strong>Saved Booking:</strong><br />
-      ✈️ Flight: ${flight || "N/A"}<br />
-      🏨 Hotel: ${hotel || "N/A"}
-    `;
-  }
+  document.getElementById("bookingDisplay").innerHTML = `
+    <p><strong>Flight:</strong> ${flight}</p>
+    <p><strong>Hotel:</strong> ${hotel}</p>
+  `;
 }
 
-// Show saved booking when app loads
-window.onload = function () {
-  displayBooking();
-};
-// Save and show user name
-function saveUserName() {
-  const name = document.getElementById("userName").value.trim();
-  if (name) {
-    localStorage.setItem("username", name);
-    showWelcomeMessage();
-  }
-}
-
-function showWelcomeMessage() {
-  const name = localStorage.getItem("username");
-  if (name) {
-    document.getElementById("userPrompt").style.display = "none";
-    const welcome = document.getElementById("welcomeMessage");
-    welcome.textContent = `Welcome, ${name}! Ready to plan your next journey? ✈️`;
-    welcome.style.display = "block";
-  }
-}
-
-// Show welcome if name already exists
-window.onload = function () {
-  displayBooking();
-  showWelcomeMessage();
-};
-// Packing List Functions
-const defaultItems = ["Passport", "Clothes", "Toothbrush", "Phone Charger", "Travel Documents"];
+document.getElementById("packingForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const item = document.getElementById("packingItem").value;
+  const items = JSON.parse(localStorage.getItem("packingItems")) || [];
+  items.push(item);
+  localStorage.setItem("packingItems", JSON.stringify(items));
+  document.getElementById("packingItem").value = "";
+  displayPackingList(items);
+});
 
 function loadPackingList() {
-  const savedList = JSON.parse(localStorage.getItem("packingList")) || defaultItems.map(item => ({ name: item, checked: false }));
-  displayPackingList(savedList);
+  const items = JSON.parse(localStorage.getItem("packingItems")) || [];
+  displayPackingList(items);
 }
 
 function displayPackingList(items) {
@@ -75,52 +64,13 @@ function displayPackingList(items) {
 
   items.forEach((item, index) => {
     const li = document.createElement("li");
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = item.checked;
-    checkbox.onchange = () => {
-      items[index].checked = checkbox.checked;
-      savePackingList(items);
-    };
-
-    const span = document.createElement("span");
-    span.textContent = item.name;
-    if (item.checked) {
-      span.style.textDecoration = "line-through";
-    }
-
-    checkbox.onchange = () => {
-      items[index].checked = checkbox.checked;
-      savePackingList(items);
-    };
-
-    li.appendChild(checkbox);
-    li.appendChild(span);
+    li.textContent = item;
     list.appendChild(li);
   });
 }
 
-function savePackingList(items) {
-  localStorage.setItem("packingList", JSON.stringify(items));
-  displayPackingList(items);
-}
-
-function addPackingItem() {
-  const newItem = document.getElementById("newItem").value.trim();
-  if (newItem) {
-    const items = JSON.parse(localStorage.getItem("packingList")) || [];
-    items.push({ name: newItem, checked: false });
-    savePackingList(items);
-    document.getElementById("newItem").value = "";
-  }
-}
-
-// Call packing list when page loads
 window.onload = function () {
   displayBooking();
   showWelcomeMessage();
   loadPackingList();
 };
-
-}
