@@ -37,5 +37,29 @@ function displayBooking() {
 window.onload = function () {
   displayBooking();
 };
+// Save and show user name
+function saveUserName() {
+  const name = document.getElementById("userName").value.trim();
+  if (name) {
+    localStorage.setItem("username", name);
+    showWelcomeMessage();
+  }
+}
+
+function showWelcomeMessage() {
+  const name = localStorage.getItem("username");
+  if (name) {
+    document.getElementById("userPrompt").style.display = "none";
+    const welcome = document.getElementById("welcomeMessage");
+    welcome.textContent = `Welcome, ${name}! Ready to plan your next journey? ✈️`;
+    welcome.style.display = "block";
+  }
+}
+
+// Show welcome if name already exists
+window.onload = function () {
+  displayBooking();
+  showWelcomeMessage();
+};
 
 }

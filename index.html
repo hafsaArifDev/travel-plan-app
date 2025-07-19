@@ -7,6 +7,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <header class="app-header">
+  <h1 class="app-title"> TravelEase</h1>
+  <p class="app-subtitle">All you need for a smooth and joyful journey </p>
+</header>
+
+<!-- Ask for user name -->
+<div id="userPrompt" class="user-name-section">
+  <label for="userName">Enter your name to begin:</label>
+  <input type="text" id="userName" placeholder="Your Name" />
+  <button onclick="saveUserName()">Start</button>
+</div>
+
+<!-- Welcome message (will show after name is saved) -->
+<h2 id="welcomeMessage" class="welcome-msg" style="display: none;"></h2>
+
 
   <!-- 🌐 Top Navigation Bar -->
   <nav class="navbar">

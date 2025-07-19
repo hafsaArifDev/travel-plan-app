@@ -69,3 +69,39 @@ button:hover {
   border-left: 4px solid #0077cc;
   border-radius: 4px;
 }
+.app-header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(to right, #1e90ff, #00bfff);
+  color: white;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.app-subtitle {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #f0f8ff;
+}
+
+.user-name-section {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.user-name-section input {
+  padding: 8px;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.welcome-msg {
+  text-align: center;
+  color: #0077cc;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
