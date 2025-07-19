@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Planner App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 🌐 Top Navigation Bar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#" onclick="showSection('dashboard')">Dashboard</a></li>
+      <li><a href="#" onclick="showSection('destinations')">Destinations</a></li>
+      <li><a href="#" onclick="showSection('bookings')">Bookings</a></li>
+      <li><a href="#" onclick="showSection('itinerary')">Itinerary</a></li>
+      <li><a href="#" onclick="showSection('packing')">Packing List</a></li>
+    </ul>
+  </nav>
+
+  <!-- 📄 Sections -->
+  <div class="section" id="dashboard">
+    <h1>Welcome to Your Travel Planner</h1>
+    <p>Plan your perfect trip with ease!</p>
+  </div>
+
+  <div class="section hidden" id="destinations">
+    <h1>Popular Destinations</h1>
+    <ul>
+      <li>Paris, France</li>
+      <li>Tokyo, Japan</li>
+      <li>New York City, USA</li>
+      <li>Istanbul, Turkey</li>
+    </ul>
+  </div>
+
+  <div class="section hidden" id="bookings">
+    <h1>Bookings</h1>
+    <p>Enter your flight and hotel information here.</p>
+   <form id="bookingForm">
+  <input type="text" id="flightInput" placeholder="Flight Number" required />
+  <input type="text" id="hotelInput" placeholder="Hotel Name" required />
+  <button type="submit">Save Booking</button>
+</form>
+
+<div id="savedBooking" class="saved-info"></div>
+
+  </div>
+
+  <div class="section hidden" id="itinerary">
+    <h1>Itinerary</h1>
+    <ul>
+      <li>Day 1: Arrival & Hotel Check-in</li>
+      <li>Day 2: City Tour</li>
+      <li>Day 3: Adventure Day</li>
+      <li>Day 4: Relax & Return</li>
+    </ul>
+  </div>
+
+  <div class="section hidden" id="packing">
+    <h1>Packing List</h1>
+    <ul>
+      <li><input type="checkbox" /> Passport</li>
+      <li><input type="checkbox" /> Clothes</li>
+      <li><input type="checkbox" /> Charger</li>
+      <li><input type="checkbox" /> Snacks</li>
+    </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
