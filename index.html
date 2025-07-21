@@ -17,26 +17,29 @@
         <li onclick="showSection('bookings')">✈️ Bookings</li>
         <li onclick="showSection('itinerary')">📆 Itinerary</li>
         <li onclick="showSection('packing')">🧳 Packing List</li>
+        <li onclick="showSection('summary')">📋 Summary</li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <div id="nameInputContainer">
-      <h2>Enter Your Name</h2>
-      <form id="nameForm">
-        <input type="text" id="username" placeholder="Your Name" required />
-        <button type="submit">Save</button>
-      </form>
-    </div>
+    <!-- Step 1: Enter Name -->
+    <section id="dashboard" class="section">
+      <div id="nameInputContainer">
+        <h2>Enter Your Name</h2>
+        <form id="nameForm">
+          <input type="text" id="username" placeholder="Your Name" required />
+          <button type="submit">Save</button>
+        </form>
+      </div>
 
-    <div id="welcomeMessage" style="display: none;">
-      <h2>Welcome, <span id="userDisplayName"></span>!</h2>
-    </div>
+      <div id="welcomeMessage" style="display: none;">
+        <h2>Welcome, <span id="userDisplayName"></span>!</h2>
+        <button onclick="goToNextStep('bookings')">Next: Bookings</button>
+      </div>
+    </section>
 
-    <section id="dashboard" class="section">This is your Dashboard.</section>
-    <section id="destinations" class="section" style="display: none;">List of your dream Destinations.</section>
-
+    <!-- Step 2: Bookings -->
     <section id="bookings" class="section" style="display: none;">
       <h2>Bookings</h2>
       <form id="bookingForm">
@@ -45,7 +48,32 @@
         <button type="submit">Save Booking</button>
       </form>
       <div id="bookingDisplay"></div>
+      <button onclick="goToNextStep('packing')">Next: Packing List</button>
     </section>
+
+    <!-- Step 3: Packing List -->
+    <section id="packing" class="section" style="display: none;">
+      <h2>Packing List</h2>
+      <form id="packingForm">
+        <input type="text" id="packingItem" placeholder="Add item..." required />
+        <button type="submit">Add</button>
+      </form>
+      <ul id="packingList"></ul>
+      <button onclick="goToNextStep('summary')">Next: Summary</button>
+    </section>
+
+    <!-- Step 4: Summary -->
+    <section id="summary" class="section" style="display: none;">
+      <h2>Your Travel Summary</h2>
+      <p><strong>Name:</strong> <span id="summaryName"></span></p>
+      <p><strong>Flight:</strong> <span id="summaryFlight"></span></p>
+      <p><strong>Hotel:</strong> <span id="summaryHotel"></span></p>
+      <p><strong>Packing List:</strong></p>
+      <ul id="summaryPackingList"></ul>
+    </section>
+
+    <!-- Other Sections -->
+    <section id="destinations" class="section" style="display: none;">Your Dream Destinations</section>
 
     <section id="itinerary" class="section" style="display: none;">
       <h2>Itinerary</h2>
@@ -55,15 +83,6 @@
         <li>Day 3: Beach Day</li>
         <li>Day 4: Shopping & Departure</li>
       </ul>
-    </section>
-
-    <section id="packing" class="section" style="display: none;">
-      <h2>Packing List</h2>
-      <form id="packingForm">
-        <input type="text" id="packingItem" placeholder="Add item..." required />
-        <button type="submit">Add</button>
-      </form>
-      <ul id="packingList"></ul>
     </section>
   </main>
 

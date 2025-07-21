@@ -3,6 +3,14 @@ function showSection(id) {
   sections.forEach(section => {
     section.style.display = section.id === id ? "block" : "none";
   });
+
+  if (id === "summary") {
+    populateSummary();
+  }
+}
+
+function goToNextStep(nextId) {
+  showSection(nextId);
 }
 
 function showWelcomeMessage() {
@@ -25,10 +33,8 @@ document.getElementById("bookingForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const flight = document.getElementById("flightInput").value;
   const hotel = document.getElementById("hotelInput").value;
-
   localStorage.setItem("flight", flight);
   localStorage.setItem("hotel", hotel);
-
   displayBooking();
   this.reset();
 });
@@ -36,7 +42,6 @@ document.getElementById("bookingForm").addEventListener("submit", function (e) {
 function displayBooking() {
   const flight = localStorage.getItem("flight") || "Not added";
   const hotel = localStorage.getItem("hotel") || "Not added";
-
   document.getElementById("bookingDisplay").innerHTML = `
     <p><strong>Flight:</strong> ${flight}</p>
     <p><strong>Hotel:</strong> ${hotel}</p>
@@ -61,8 +66,26 @@ function loadPackingList() {
 function displayPackingList(items) {
   const list = document.getElementById("packingList");
   list.innerHTML = "";
+  items.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
 
-  items.forEach((item, index) => {
+function populateSummary() {
+  const name = localStorage.getItem("travelAppUserName") || "Not provided";
+  const flight = localStorage.getItem("flight") || "Not provided";
+  const hotel = localStorage.getItem("hotel") || "Not provided";
+  const items = JSON.parse(localStorage.getItem("packingItems")) || [];
+
+  document.getElementById("summaryName").textContent = name;
+  document.getElementById("summaryFlight").textContent = flight;
+  document.getElementById("summaryHotel").textContent = hotel;
+
+  const list = document.getElementById("summaryPackingList");
+  list.innerHTML = "";
+  items.forEach(item => {
     const li = document.createElement("li");
     li.textContent = item;
     list.appendChild(li);
